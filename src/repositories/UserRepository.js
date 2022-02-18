@@ -2,7 +2,7 @@ const { v4 } = require('uuid');
 let users = require('../mocks/users');
 
 class UserRepository {
-  listAllUsers() {
+  list() {
     return users;
   }
 
@@ -12,7 +12,7 @@ class UserRepository {
     return user;
   }
 
-  createNewUser(body) {
+  create(body) {
     const newUser = {
       ...body,
       id: v4(),
@@ -24,6 +24,23 @@ class UserRepository {
     ]
 
     return newUser;
+  }
+
+  update(id, body) {
+    let updatedUser = users.find((user) => user.id === id);
+    updatedUser = {
+      ...updatedUser,
+      ...body,
+      id,
+    }
+    
+    users = users.map((user) => (
+      user.id === id
+      ? updatedUser
+      : user
+    ));
+
+    return updatedUser;
   }
 }
 
