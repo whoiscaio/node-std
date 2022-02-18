@@ -1,50 +1,33 @@
 const { v4 } = require('uuid');
-let users = require('../mocks/users');
+const UserModel = require('../models/User.model');
 
 class UserRepository {
-  list() {
+  async list() {
+    const users = await UserModel.find({});
+
     return users;
   }
 
-  findById(id) {
-    const user = users.find((user) => user.id === id);
+  async findById(id) {
+    const user = await UserModel.findById(id);
 
     return user;
   }
 
-  create(body) {
-    const newUser = {
-      ...body,
-      id: v4(),
-    }
-
-    users = [
-      ...users,
-      newUser,
-    ]
+  async create(body) {
+    const newUser = await UserModel.create(body);
 
     return newUser;
   }
 
-  update(id, body) {
-    let updatedUser = users.find((user) => user.id === id);
-    updatedUser = {
-      ...updatedUser,
-      ...body,
-      id,
-    }
-    
-    users = users.map((user) => (
-      user.id === id
-      ? updatedUser
-      : user
-    ));
+  async update(id, body) {
+    const updatedUser = await UserModel.findByIdAndUpdate(id, body, { new: true });
 
     return updatedUser;
   }
 
-  delete(id) {
-    users = users.filter((user) => user.id !== id);
+  async delete(id) {
+    await UserModel.findByIdAndDelete(id);
   }
 }
 
