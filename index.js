@@ -9,6 +9,7 @@ const PORT = 3000;
 connect();
 
 const app = express();
+app.use(express.json());
 app.use(router);
 
 app.listen(PORT, () => {
