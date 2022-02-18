@@ -41,6 +41,14 @@ class UserController {
 
     res.status(200).json(updatedUser);
   }
+
+  deleteUser(req, res) {
+    const { id } = req.params;
+
+    UserRepository.delete(id);
+
+    res.sendStatus(204);
+  }
 }
 
 module.exports = new UserController();

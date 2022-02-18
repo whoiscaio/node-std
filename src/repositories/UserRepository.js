@@ -42,6 +42,10 @@ class UserRepository {
 
     return updatedUser;
   }
+
+  delete(id) {
+    users = users.filter((user) => user.id !== id);
+  }
 }
 
 module.exports = new UserRepository();
