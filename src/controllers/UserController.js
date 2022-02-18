@@ -11,6 +11,18 @@ class UserController {
     }
   }
 
+  async getUser(req, res) {
+    const { id } = req.params;
+
+    try {
+      const user = await UserModel.findById(id);
+
+      res.status(200).json(user);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
+
   async addUser(req, res) {
     try {
       const user = await UserModel.create(req.body);
