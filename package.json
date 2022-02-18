@@ -5,6 +5,9 @@
   "repository": "https://github.com/whoiscaio/node-std",
   "author": "Caio <whoiscaio@protonmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "express": "^4.17.3"
   },
