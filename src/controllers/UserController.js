@@ -18,6 +18,14 @@ class UserController {
 
     res.status(200).json(user);
   }
+  
+  addNewUser(req, res) {
+    const body = req.body;
+
+    const newUser = UserRepository.createNewUser(body);
+
+    res.status(201).json(newUser);
+  }
 }
 
 module.exports = new UserController();

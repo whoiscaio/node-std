@@ -1,4 +1,5 @@
-const users = require('../mocks/users');
+const { v4 } = require('uuid');
+let users = require('../mocks/users');
 
 class UserRepository {
   listAllUsers() {
@@ -9,6 +10,20 @@ class UserRepository {
     const user = users.find((user) => user.id === id);
 
     return user;
+  }
+
+  createNewUser(body) {
+    const newUser = {
+      ...body,
+      id: v4(),
+    }
+
+    users = [
+      ...users,
+      newUser,
+    ]
+
+    return newUser;
   }
 }
 
