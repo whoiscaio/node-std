@@ -38,9 +38,9 @@ class UserController {
     const { id } = req.params;
 
     try {
-      await UserModel.updateOne({ _id: id }, newInfo);
+      const user = await UserModel.findByIdAndUpdate(id, newInfo, { new: true });
 
-      res.sendStatus(204);
+      res.status(200).json(user);
     } catch (err) {
       res.status(500).send(err.message);
     }
@@ -50,7 +50,7 @@ class UserController {
     const { id } = req.params;
 
     try {
-      await UserModel.deleteOne({ _id: id });
+      await UserModel.findByIdAndDelete(id);
 
       res.sendStatus(204);
     } catch (err) {
