@@ -32,6 +32,31 @@ class UserController {
       res.status(500).send(err.message);
     }
   }
+
+  async updateUser(req, res) {
+    const newInfo = req.body;
+    const { id } = req.params;
+
+    try {
+      await UserModel.updateOne({ _id: id }, newInfo);
+
+      res.sendStatus(204);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
+
+  async deleteUser(req, res) {
+    const { id } = req.params;
+
+    try {
+      await UserModel.deleteOne({ _id: id });
+
+      res.sendStatus(204);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  }
 }
 
 module.exports = new UserController();
